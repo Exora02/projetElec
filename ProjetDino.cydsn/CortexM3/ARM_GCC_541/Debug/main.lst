@@ -1,0 +1,1658 @@
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.initDino,"ax",%progbits
+  20              		.align	2
+  21              		.global	initDino
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	initDino, %function
+  25              	initDino:
+  26              	.LFB63:
+  27              		.file 1 "main.c"
+   1:main.c        **** /* ========================================
+   2:main.c        ****  *
+   3:main.c        ****  * Copyright YOUR COMPANY, THE YEAR
+   4:main.c        ****  * All Rights Reserved
+   5:main.c        ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:main.c        ****  *
+   7:main.c        ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:main.c        ****  * WHICH IS THE PROPERTY OF your company.
+   9:main.c        ****  *
+  10:main.c        ****  * ========================================
+  11:main.c        **** */
+  12:main.c        **** #include "project.h"
+  13:main.c        **** 
+  14:main.c        **** #define SERVO_RAISED 2400
+  15:main.c        **** #define SERVO_CLICKED 2800
+  16:main.c        **** 
+  17:main.c        **** int JUMP_COUNTER = 0;
+  18:main.c        **** 
+  19:main.c        **** void initDino(){
+  28              		.loc 1 19 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+  20:main.c        ****     PWM_JUMP_Start();
+  36              		.loc 1 20 0
+  37 0002 FFF7FEFF 		bl	PWM_JUMP_Start
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 2
+
+
+  38              	.LVL0:
+  21:main.c        ****     PWM_DUCK_Start();
+  39              		.loc 1 21 0
+  40 0006 FFF7FEFF 		bl	PWM_DUCK_Start
+  41              	.LVL1:
+  22:main.c        ****     ADC_Start();
+  42              		.loc 1 22 0
+  43 000a FFF7FEFF 		bl	ADC_Start
+  44              	.LVL2:
+  23:main.c        ****     LCD_Start();
+  45              		.loc 1 23 0
+  46 000e FFF7FEFF 		bl	LCD_Start
+  47              	.LVL3:
+  48 0012 08BD     		pop	{r3, pc}
+  49              		.cfi_endproc
+  50              	.LFE63:
+  51              		.size	initDino, .-initDino
+  52              		.section	.text.jumpLEDtoggle,"ax",%progbits
+  53              		.align	2
+  54              		.global	jumpLEDtoggle
+  55              		.thumb
+  56              		.thumb_func
+  57              		.type	jumpLEDtoggle, %function
+  58              	jumpLEDtoggle:
+  59              	.LFB64:
+  24:main.c        **** }
+  25:main.c        **** 
+  26:main.c        **** void jumpLEDtoggle(){
+  60              		.loc 1 26 0
+  61              		.cfi_startproc
+  62              		@ args = 0, pretend = 0, frame = 0
+  63              		@ frame_needed = 0, uses_anonymous_args = 0
+  64 0000 08B5     		push	{r3, lr}
+  65              		.cfi_def_cfa_offset 8
+  66              		.cfi_offset 3, -8
+  67              		.cfi_offset 14, -4
+  27:main.c        ****     LED1_Write(~LED1_Read());
+  68              		.loc 1 27 0
+  69 0002 FFF7FEFF 		bl	LED1_Read
+  70              	.LVL4:
+  71 0006 C043     		mvns	r0, r0
+  72 0008 C0B2     		uxtb	r0, r0
+  73 000a FFF7FEFF 		bl	LED1_Write
+  74              	.LVL5:
+  28:main.c        ****     LED2_Write(~LED2_Read());
+  75              		.loc 1 28 0
+  76 000e FFF7FEFF 		bl	LED2_Read
+  77              	.LVL6:
+  78 0012 C043     		mvns	r0, r0
+  79 0014 C0B2     		uxtb	r0, r0
+  80 0016 FFF7FEFF 		bl	LED2_Write
+  81              	.LVL7:
+  82 001a 08BD     		pop	{r3, pc}
+  83              		.cfi_endproc
+  84              	.LFE64:
+  85              		.size	jumpLEDtoggle, .-jumpLEDtoggle
+  86              		.section	.text.duckLEDtoggle,"ax",%progbits
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 3
+
+
+  87              		.align	2
+  88              		.global	duckLEDtoggle
+  89              		.thumb
+  90              		.thumb_func
+  91              		.type	duckLEDtoggle, %function
+  92              	duckLEDtoggle:
+  93              	.LFB65:
+  29:main.c        **** }
+  30:main.c        **** 
+  31:main.c        **** void duckLEDtoggle(){
+  94              		.loc 1 31 0
+  95              		.cfi_startproc
+  96              		@ args = 0, pretend = 0, frame = 0
+  97              		@ frame_needed = 0, uses_anonymous_args = 0
+  98 0000 08B5     		push	{r3, lr}
+  99              		.cfi_def_cfa_offset 8
+ 100              		.cfi_offset 3, -8
+ 101              		.cfi_offset 14, -4
+  32:main.c        ****     LED3_Write(~LED3_Read());
+ 102              		.loc 1 32 0
+ 103 0002 FFF7FEFF 		bl	LED3_Read
+ 104              	.LVL8:
+ 105 0006 C043     		mvns	r0, r0
+ 106 0008 C0B2     		uxtb	r0, r0
+ 107 000a FFF7FEFF 		bl	LED3_Write
+ 108              	.LVL9:
+  33:main.c        ****     LED4_Write(~LED4_Read());
+ 109              		.loc 1 33 0
+ 110 000e FFF7FEFF 		bl	LED4_Read
+ 111              	.LVL10:
+ 112 0012 C043     		mvns	r0, r0
+ 113 0014 C0B2     		uxtb	r0, r0
+ 114 0016 FFF7FEFF 		bl	LED4_Write
+ 115              	.LVL11:
+ 116 001a 08BD     		pop	{r3, pc}
+ 117              		.cfi_endproc
+ 118              	.LFE65:
+ 119              		.size	duckLEDtoggle, .-duckLEDtoggle
+ 120              		.section	.text.jump,"ax",%progbits
+ 121              		.align	2
+ 122              		.global	jump
+ 123              		.thumb
+ 124              		.thumb_func
+ 125              		.type	jump, %function
+ 126              	jump:
+ 127              	.LFB66:
+  34:main.c        **** }
+  35:main.c        **** 
+  36:main.c        **** void jump(){
+ 128              		.loc 1 36 0
+ 129              		.cfi_startproc
+ 130              		@ args = 0, pretend = 0, frame = 0
+ 131              		@ frame_needed = 0, uses_anonymous_args = 0
+ 132 0000 08B5     		push	{r3, lr}
+ 133              		.cfi_def_cfa_offset 8
+ 134              		.cfi_offset 3, -8
+ 135              		.cfi_offset 14, -4
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 4
+
+
+  37:main.c        ****     jumpLEDtoggle();
+ 136              		.loc 1 37 0
+ 137 0002 FFF7FEFF 		bl	jumpLEDtoggle
+ 138              	.LVL12:
+  38:main.c        ****     PWM_JUMP_WriteCompare(SERVO_CLICKED);
+ 139              		.loc 1 38 0
+ 140 0006 4FF42F60 		mov	r0, #2800
+ 141 000a FFF7FEFF 		bl	PWM_JUMP_WriteCompare
+ 142              	.LVL13:
+  39:main.c        ****     CyDelay(100);
+ 143              		.loc 1 39 0
+ 144 000e 6420     		movs	r0, #100
+ 145 0010 FFF7FEFF 		bl	CyDelay
+ 146              	.LVL14:
+  40:main.c        ****     PWM_JUMP_WriteCompare(SERVO_RAISED);
+ 147              		.loc 1 40 0
+ 148 0014 4FF41660 		mov	r0, #2400
+ 149 0018 FFF7FEFF 		bl	PWM_JUMP_WriteCompare
+ 150              	.LVL15:
+  41:main.c        ****     CyDelay(100);
+ 151              		.loc 1 41 0
+ 152 001c 6420     		movs	r0, #100
+ 153 001e FFF7FEFF 		bl	CyDelay
+ 154              	.LVL16:
+  42:main.c        ****     jumpLEDtoggle();
+ 155              		.loc 1 42 0
+ 156 0022 FFF7FEFF 		bl	jumpLEDtoggle
+ 157              	.LVL17:
+  43:main.c        ****     JUMP_COUNTER++;
+ 158              		.loc 1 43 0
+ 159 0026 024A     		ldr	r2, .L9
+ 160 0028 1368     		ldr	r3, [r2]
+ 161 002a 0133     		adds	r3, r3, #1
+ 162 002c 1360     		str	r3, [r2]
+ 163 002e 08BD     		pop	{r3, pc}
+ 164              	.L10:
+ 165              		.align	2
+ 166              	.L9:
+ 167 0030 00000000 		.word	.LANCHOR0
+ 168              		.cfi_endproc
+ 169              	.LFE66:
+ 170              		.size	jump, .-jump
+ 171              		.section	.text.duck,"ax",%progbits
+ 172              		.align	2
+ 173              		.global	duck
+ 174              		.thumb
+ 175              		.thumb_func
+ 176              		.type	duck, %function
+ 177              	duck:
+ 178              	.LFB67:
+  44:main.c        ****     
+  45:main.c        **** }
+  46:main.c        **** 
+  47:main.c        **** void duck(){
+ 179              		.loc 1 47 0
+ 180              		.cfi_startproc
+ 181              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 5
+
+
+ 182              		@ frame_needed = 0, uses_anonymous_args = 0
+ 183 0000 08B5     		push	{r3, lr}
+ 184              		.cfi_def_cfa_offset 8
+ 185              		.cfi_offset 3, -8
+ 186              		.cfi_offset 14, -4
+  48:main.c        ****     duckLEDtoggle();
+ 187              		.loc 1 48 0
+ 188 0002 FFF7FEFF 		bl	duckLEDtoggle
+ 189              	.LVL18:
+  49:main.c        ****     PWM_DUCK_WriteCompare(SERVO_CLICKED);
+ 190              		.loc 1 49 0
+ 191 0006 4FF42F60 		mov	r0, #2800
+ 192 000a FFF7FEFF 		bl	PWM_DUCK_WriteCompare
+ 193              	.LVL19:
+  50:main.c        ****     CyDelay(100);
+ 194              		.loc 1 50 0
+ 195 000e 6420     		movs	r0, #100
+ 196 0010 FFF7FEFF 		bl	CyDelay
+ 197              	.LVL20:
+  51:main.c        ****     PWM_DUCK_WriteCompare(SERVO_RAISED);
+ 198              		.loc 1 51 0
+ 199 0014 4FF41660 		mov	r0, #2400
+ 200 0018 FFF7FEFF 		bl	PWM_DUCK_WriteCompare
+ 201              	.LVL21:
+  52:main.c        ****     CyDelay(100);
+ 202              		.loc 1 52 0
+ 203 001c 6420     		movs	r0, #100
+ 204 001e FFF7FEFF 		bl	CyDelay
+ 205              	.LVL22:
+  53:main.c        ****     duckLEDtoggle();
+ 206              		.loc 1 53 0
+ 207 0022 FFF7FEFF 		bl	duckLEDtoggle
+ 208              	.LVL23:
+  54:main.c        ****     JUMP_COUNTER++;
+ 209              		.loc 1 54 0
+ 210 0026 024A     		ldr	r2, .L13
+ 211 0028 1368     		ldr	r3, [r2]
+ 212 002a 0133     		adds	r3, r3, #1
+ 213 002c 1360     		str	r3, [r2]
+ 214 002e 08BD     		pop	{r3, pc}
+ 215              	.L14:
+ 216              		.align	2
+ 217              	.L13:
+ 218 0030 00000000 		.word	.LANCHOR0
+ 219              		.cfi_endproc
+ 220              	.LFE67:
+ 221              		.size	duck, .-duck
+ 222              		.section	.text.sw1,"ax",%progbits
+ 223              		.align	2
+ 224              		.global	sw1
+ 225              		.thumb
+ 226              		.thumb_func
+ 227              		.type	sw1, %function
+ 228              	sw1:
+ 229              	.LFB68:
+  55:main.c        **** }
+  56:main.c        **** 
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 6
+
+
+  57:main.c        **** void sw1(){
+ 230              		.loc 1 57 0
+ 231              		.cfi_startproc
+ 232              		@ args = 0, pretend = 0, frame = 0
+ 233              		@ frame_needed = 0, uses_anonymous_args = 0
+ 234 0000 08B5     		push	{r3, lr}
+ 235              		.cfi_def_cfa_offset 8
+ 236              		.cfi_offset 3, -8
+ 237              		.cfi_offset 14, -4
+  58:main.c        ****     jump();
+ 238              		.loc 1 58 0
+ 239 0002 FFF7FEFF 		bl	jump
+ 240              	.LVL24:
+ 241 0006 08BD     		pop	{r3, pc}
+ 242              		.cfi_endproc
+ 243              	.LFE68:
+ 244              		.size	sw1, .-sw1
+ 245              		.section	.text.sw2,"ax",%progbits
+ 246              		.align	2
+ 247              		.global	sw2
+ 248              		.thumb
+ 249              		.thumb_func
+ 250              		.type	sw2, %function
+ 251              	sw2:
+ 252              	.LFB69:
+  59:main.c        **** }
+  60:main.c        **** 
+  61:main.c        **** void sw2(){
+ 253              		.loc 1 61 0
+ 254              		.cfi_startproc
+ 255              		@ args = 0, pretend = 0, frame = 0
+ 256              		@ frame_needed = 0, uses_anonymous_args = 0
+ 257 0000 08B5     		push	{r3, lr}
+ 258              		.cfi_def_cfa_offset 8
+ 259              		.cfi_offset 3, -8
+ 260              		.cfi_offset 14, -4
+  62:main.c        ****     duck();
+ 261              		.loc 1 62 0
+ 262 0002 FFF7FEFF 		bl	duck
+ 263              	.LVL25:
+ 264 0006 08BD     		pop	{r3, pc}
+ 265              		.cfi_endproc
+ 266              	.LFE69:
+ 267              		.size	sw2, .-sw2
+ 268              		.section	.text.sw3,"ax",%progbits
+ 269              		.align	2
+ 270              		.global	sw3
+ 271              		.thumb
+ 272              		.thumb_func
+ 273              		.type	sw3, %function
+ 274              	sw3:
+ 275              	.LFB70:
+  63:main.c        **** }
+  64:main.c        **** 
+  65:main.c        **** void sw3(){
+ 276              		.loc 1 65 0
+ 277              		.cfi_startproc
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 7
+
+
+ 278              		@ args = 0, pretend = 0, frame = 0
+ 279              		@ frame_needed = 0, uses_anonymous_args = 0
+ 280              		@ link register save eliminated.
+  66:main.c        ****     JUMP_COUNTER = 0;
+ 281              		.loc 1 66 0
+ 282 0000 0022     		movs	r2, #0
+ 283 0002 014B     		ldr	r3, .L20
+ 284 0004 1A60     		str	r2, [r3]
+ 285 0006 7047     		bx	lr
+ 286              	.L21:
+ 287              		.align	2
+ 288              	.L20:
+ 289 0008 00000000 		.word	.LANCHOR0
+ 290              		.cfi_endproc
+ 291              	.LFE70:
+ 292              		.size	sw3, .-sw3
+ 293              		.section	.text.main,"ax",%progbits
+ 294              		.align	2
+ 295              		.global	main
+ 296              		.thumb
+ 297              		.thumb_func
+ 298              		.type	main, %function
+ 299              	main:
+ 300              	.LFB71:
+  67:main.c        **** }
+  68:main.c        **** 
+  69:main.c        **** int main(void)
+  70:main.c        **** {
+ 301              		.loc 1 70 0
+ 302              		.cfi_startproc
+ 303              		@ args = 0, pretend = 0, frame = 0
+ 304              		@ frame_needed = 0, uses_anonymous_args = 0
+ 305 0000 10B5     		push	{r4, lr}
+ 306              		.cfi_def_cfa_offset 8
+ 307              		.cfi_offset 4, -8
+ 308              		.cfi_offset 14, -4
+  71:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+ 309              		.loc 1 71 0
+ 310              		.syntax unified
+ 311              	@ 71 "main.c" 1
+ 312 0002 62B6     		CPSIE   i
+ 313              	@ 0 "" 2
+  72:main.c        **** 
+  73:main.c        ****     initDino();
+ 314              		.loc 1 73 0
+ 315              		.thumb
+ 316              		.syntax unified
+ 317 0004 FFF7FEFF 		bl	initDino
+ 318              	.LVL26:
+ 319              	.L25:
+ 320              	.LBB2:
+  74:main.c        ****     
+  75:main.c        ****     for(;;)
+  76:main.c        ****     {
+  77:main.c        ****         if(SW1_Read()){
+ 321              		.loc 1 77 0
+ 322 0008 FFF7FEFF 		bl	SW1_Read
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 8
+
+
+ 323              	.LVL27:
+ 324 000c 08B1     		cbz	r0, .L23
+  78:main.c        ****             sw1();
+ 325              		.loc 1 78 0
+ 326 000e FFF7FEFF 		bl	sw1
+ 327              	.LVL28:
+ 328              	.L23:
+  79:main.c        ****         }
+  80:main.c        ****         if(SW2_Read()){
+ 329              		.loc 1 80 0
+ 330 0012 FFF7FEFF 		bl	SW2_Read
+ 331              	.LVL29:
+ 332 0016 08B1     		cbz	r0, .L24
+  81:main.c        ****             sw2();
+ 333              		.loc 1 81 0
+ 334 0018 FFF7FEFF 		bl	sw2
+ 335              	.LVL30:
+ 336              	.L24:
+  82:main.c        ****         }
+  83:main.c        ****         uint16_t i = ADC_Read16();
+ 337              		.loc 1 83 0
+ 338 001c FFF7FEFF 		bl	ADC_Read16
+ 339              	.LVL31:
+ 340 0020 84B2     		uxth	r4, r0
+ 341              	.LVL32:
+  84:main.c        ****         LCD_ClearDisplay();
+ 342              		.loc 1 84 0
+ 343 0022 0120     		movs	r0, #1
+ 344 0024 FFF7FEFF 		bl	LCD_WriteControl
+ 345              	.LVL33:
+  85:main.c        ****         LCD_Position(0,0);
+ 346              		.loc 1 85 0
+ 347 0028 0021     		movs	r1, #0
+ 348 002a 0846     		mov	r0, r1
+ 349 002c FFF7FEFF 		bl	LCD_Position
+ 350              	.LVL34:
+  86:main.c        ****         LCD_PrintNumber(i);
+ 351              		.loc 1 86 0
+ 352 0030 2046     		mov	r0, r4
+ 353 0032 FFF7FEFF 		bl	LCD_PrintU32Number
+ 354              	.LVL35:
+  87:main.c        ****         if(i>=15000){
+ 355              		.loc 1 87 0
+ 356 0036 43F69723 		movw	r3, #14999
+ 357 003a 9C42     		cmp	r4, r3
+ 358 003c E4D9     		bls	.L25
+  88:main.c        ****            
+  89:main.c        ****             jump();
+ 359              		.loc 1 89 0
+ 360 003e FFF7FEFF 		bl	jump
+ 361              	.LVL36:
+ 362 0042 E1E7     		b	.L25
+ 363              	.LBE2:
+ 364              		.cfi_endproc
+ 365              	.LFE71:
+ 366              		.size	main, .-main
+ 367              		.global	JUMP_COUNTER
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 9
+
+
+ 368              		.bss
+ 369              		.align	2
+ 370              		.set	.LANCHOR0,. + 0
+ 371              		.type	JUMP_COUNTER, %object
+ 372              		.size	JUMP_COUNTER, 4
+ 373              	JUMP_COUNTER:
+ 374 0000 00000000 		.space	4
+ 375              		.text
+ 376              	.Letext0:
+ 377              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 378              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 379              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 380              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 381              		.file 6 "Generated_Source\\PSoC5/PWM_JUMP.h"
+ 382              		.file 7 "Generated_Source\\PSoC5/PWM_DUCK.h"
+ 383              		.file 8 "Generated_Source\\PSoC5/ADC.h"
+ 384              		.file 9 "Generated_Source\\PSoC5/LCD.h"
+ 385              		.file 10 "Generated_Source\\PSoC5/LED1.h"
+ 386              		.file 11 "Generated_Source\\PSoC5/LED2.h"
+ 387              		.file 12 "Generated_Source\\PSoC5/LED3.h"
+ 388              		.file 13 "Generated_Source\\PSoC5/LED4.h"
+ 389              		.file 14 "Generated_Source\\PSoC5/CyLib.h"
+ 390              		.file 15 "Generated_Source\\PSoC5/SW1.h"
+ 391              		.file 16 "Generated_Source\\PSoC5/SW2.h"
+ 392              		.section	.debug_info,"",%progbits
+ 393              	.Ldebug_info0:
+ 394 0000 6E040000 		.4byte	0x46e
+ 395 0004 0400     		.2byte	0x4
+ 396 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 397 000a 04       		.byte	0x4
+ 398 000b 01       		.uleb128 0x1
+ 399 000c 14000000 		.4byte	.LASF47
+ 400 0010 0C       		.byte	0xc
+ 401 0011 94020000 		.4byte	.LASF48
+ 402 0015 51010000 		.4byte	.LASF49
+ 403 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 404 001d 00000000 		.4byte	0
+ 405 0021 00000000 		.4byte	.Ldebug_line0
+ 406 0025 02       		.uleb128 0x2
+ 407 0026 01       		.byte	0x1
+ 408 0027 06       		.byte	0x6
+ 409 0028 E8020000 		.4byte	.LASF0
+ 410 002c 02       		.uleb128 0x2
+ 411 002d 01       		.byte	0x1
+ 412 002e 08       		.byte	0x8
+ 413 002f AF010000 		.4byte	.LASF1
+ 414 0033 02       		.uleb128 0x2
+ 415 0034 02       		.byte	0x2
+ 416 0035 05       		.byte	0x5
+ 417 0036 B1020000 		.4byte	.LASF2
+ 418 003a 03       		.uleb128 0x3
+ 419 003b BD010000 		.4byte	.LASF4
+ 420 003f 02       		.byte	0x2
+ 421 0040 2B       		.byte	0x2b
+ 422 0041 45000000 		.4byte	0x45
+ 423 0045 02       		.uleb128 0x2
+ 424 0046 02       		.byte	0x2
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 10
+
+
+ 425 0047 07       		.byte	0x7
+ 426 0048 CC000000 		.4byte	.LASF3
+ 427 004c 03       		.uleb128 0x3
+ 428 004d B7000000 		.4byte	.LASF5
+ 429 0051 02       		.byte	0x2
+ 430 0052 3F       		.byte	0x3f
+ 431 0053 57000000 		.4byte	0x57
+ 432 0057 02       		.uleb128 0x2
+ 433 0058 04       		.byte	0x4
+ 434 0059 05       		.byte	0x5
+ 435 005a CE020000 		.4byte	.LASF6
+ 436 005e 02       		.uleb128 0x2
+ 437 005f 04       		.byte	0x4
+ 438 0060 07       		.byte	0x7
+ 439 0061 C8010000 		.4byte	.LASF7
+ 440 0065 02       		.uleb128 0x2
+ 441 0066 08       		.byte	0x8
+ 442 0067 05       		.byte	0x5
+ 443 0068 86020000 		.4byte	.LASF8
+ 444 006c 02       		.uleb128 0x2
+ 445 006d 08       		.byte	0x8
+ 446 006e 07       		.byte	0x7
+ 447 006f 0E020000 		.4byte	.LASF9
+ 448 0073 04       		.uleb128 0x4
+ 449 0074 04       		.byte	0x4
+ 450 0075 05       		.byte	0x5
+ 451 0076 696E7400 		.ascii	"int\000"
+ 452 007a 02       		.uleb128 0x2
+ 453 007b 04       		.byte	0x4
+ 454 007c 07       		.byte	0x7
+ 455 007d E6010000 		.4byte	.LASF10
+ 456 0081 03       		.uleb128 0x3
+ 457 0082 BB020000 		.4byte	.LASF11
+ 458 0086 03       		.byte	0x3
+ 459 0087 24       		.byte	0x24
+ 460 0088 3A000000 		.4byte	0x3a
+ 461 008c 03       		.uleb128 0x3
+ 462 008d 66020000 		.4byte	.LASF12
+ 463 0091 03       		.byte	0x3
+ 464 0092 2C       		.byte	0x2c
+ 465 0093 4C000000 		.4byte	0x4c
+ 466 0097 05       		.uleb128 0x5
+ 467 0098 DF010000 		.4byte	.LASF13
+ 468 009c 04       		.byte	0x4
+ 469 009d E901     		.2byte	0x1e9
+ 470 009f 45000000 		.4byte	0x45
+ 471 00a3 02       		.uleb128 0x2
+ 472 00a4 04       		.byte	0x4
+ 473 00a5 04       		.byte	0x4
+ 474 00a6 1D010000 		.4byte	.LASF14
+ 475 00aa 02       		.uleb128 0x2
+ 476 00ab 08       		.byte	0x8
+ 477 00ac 04       		.byte	0x4
+ 478 00ad F5000000 		.4byte	.LASF15
+ 479 00b1 02       		.uleb128 0x2
+ 480 00b2 01       		.byte	0x1
+ 481 00b3 08       		.byte	0x8
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 11
+
+
+ 482 00b4 9B020000 		.4byte	.LASF16
+ 483 00b8 02       		.uleb128 0x2
+ 484 00b9 08       		.byte	0x8
+ 485 00ba 04       		.byte	0x4
+ 486 00bb D7020000 		.4byte	.LASF17
+ 487 00bf 02       		.uleb128 0x2
+ 488 00c0 04       		.byte	0x4
+ 489 00c1 07       		.byte	0x7
+ 490 00c2 6E020000 		.4byte	.LASF18
+ 491 00c6 06       		.uleb128 0x6
+ 492 00c7 F4020000 		.4byte	.LASF19
+ 493 00cb 01       		.byte	0x1
+ 494 00cc 13       		.byte	0x13
+ 495 00cd 00000000 		.4byte	.LFB63
+ 496 00d1 14000000 		.4byte	.LFE63-.LFB63
+ 497 00d5 01       		.uleb128 0x1
+ 498 00d6 9C       		.byte	0x9c
+ 499 00d7 00010000 		.4byte	0x100
+ 500 00db 07       		.uleb128 0x7
+ 501 00dc 06000000 		.4byte	.LVL0
+ 502 00e0 8A030000 		.4byte	0x38a
+ 503 00e4 07       		.uleb128 0x7
+ 504 00e5 0A000000 		.4byte	.LVL1
+ 505 00e9 95030000 		.4byte	0x395
+ 506 00ed 07       		.uleb128 0x7
+ 507 00ee 0E000000 		.4byte	.LVL2
+ 508 00f2 A0030000 		.4byte	0x3a0
+ 509 00f6 07       		.uleb128 0x7
+ 510 00f7 12000000 		.4byte	.LVL3
+ 511 00fb AB030000 		.4byte	0x3ab
+ 512 00ff 00       		.byte	0
+ 513 0100 06       		.uleb128 0x6
+ 514 0101 58020000 		.4byte	.LASF20
+ 515 0105 01       		.byte	0x1
+ 516 0106 1A       		.byte	0x1a
+ 517 0107 00000000 		.4byte	.LFB64
+ 518 010b 1C000000 		.4byte	.LFE64-.LFB64
+ 519 010f 01       		.uleb128 0x1
+ 520 0110 9C       		.byte	0x9c
+ 521 0111 3A010000 		.4byte	0x13a
+ 522 0115 07       		.uleb128 0x7
+ 523 0116 06000000 		.4byte	.LVL4
+ 524 011a B6030000 		.4byte	0x3b6
+ 525 011e 07       		.uleb128 0x7
+ 526 011f 0E000000 		.4byte	.LVL5
+ 527 0123 C1030000 		.4byte	0x3c1
+ 528 0127 07       		.uleb128 0x7
+ 529 0128 12000000 		.4byte	.LVL6
+ 530 012c CC030000 		.4byte	0x3cc
+ 531 0130 07       		.uleb128 0x7
+ 532 0131 1A000000 		.4byte	.LVL7
+ 533 0135 D7030000 		.4byte	0x3d7
+ 534 0139 00       		.byte	0
+ 535 013a 06       		.uleb128 0x6
+ 536 013b F3010000 		.4byte	.LASF21
+ 537 013f 01       		.byte	0x1
+ 538 0140 1F       		.byte	0x1f
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 12
+
+
+ 539 0141 00000000 		.4byte	.LFB65
+ 540 0145 1C000000 		.4byte	.LFE65-.LFB65
+ 541 0149 01       		.uleb128 0x1
+ 542 014a 9C       		.byte	0x9c
+ 543 014b 74010000 		.4byte	0x174
+ 544 014f 07       		.uleb128 0x7
+ 545 0150 06000000 		.4byte	.LVL8
+ 546 0154 E2030000 		.4byte	0x3e2
+ 547 0158 07       		.uleb128 0x7
+ 548 0159 0E000000 		.4byte	.LVL9
+ 549 015d ED030000 		.4byte	0x3ed
+ 550 0161 07       		.uleb128 0x7
+ 551 0162 12000000 		.4byte	.LVL10
+ 552 0166 F8030000 		.4byte	0x3f8
+ 553 016a 07       		.uleb128 0x7
+ 554 016b 1A000000 		.4byte	.LVL11
+ 555 016f 03040000 		.4byte	0x403
+ 556 0173 00       		.byte	0
+ 557 0174 06       		.uleb128 0x6
+ 558 0175 E3020000 		.4byte	.LASF22
+ 559 0179 01       		.byte	0x1
+ 560 017a 24       		.byte	0x24
+ 561 017b 00000000 		.4byte	.LFB66
+ 562 017f 34000000 		.4byte	.LFE66-.LFB66
+ 563 0183 01       		.uleb128 0x1
+ 564 0184 9C       		.byte	0x9c
+ 565 0185 EE010000 		.4byte	0x1ee
+ 566 0189 07       		.uleb128 0x7
+ 567 018a 06000000 		.4byte	.LVL12
+ 568 018e 00010000 		.4byte	0x100
+ 569 0192 08       		.uleb128 0x8
+ 570 0193 0E000000 		.4byte	.LVL13
+ 571 0197 0E040000 		.4byte	0x40e
+ 572 019b A7010000 		.4byte	0x1a7
+ 573 019f 09       		.uleb128 0x9
+ 574 01a0 01       		.uleb128 0x1
+ 575 01a1 50       		.byte	0x50
+ 576 01a2 03       		.uleb128 0x3
+ 577 01a3 0A       		.byte	0xa
+ 578 01a4 F00A     		.2byte	0xaf0
+ 579 01a6 00       		.byte	0
+ 580 01a7 08       		.uleb128 0x8
+ 581 01a8 14000000 		.4byte	.LVL14
+ 582 01ac 19040000 		.4byte	0x419
+ 583 01b0 BB010000 		.4byte	0x1bb
+ 584 01b4 09       		.uleb128 0x9
+ 585 01b5 01       		.uleb128 0x1
+ 586 01b6 50       		.byte	0x50
+ 587 01b7 02       		.uleb128 0x2
+ 588 01b8 08       		.byte	0x8
+ 589 01b9 64       		.byte	0x64
+ 590 01ba 00       		.byte	0
+ 591 01bb 08       		.uleb128 0x8
+ 592 01bc 1C000000 		.4byte	.LVL15
+ 593 01c0 0E040000 		.4byte	0x40e
+ 594 01c4 D0010000 		.4byte	0x1d0
+ 595 01c8 09       		.uleb128 0x9
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 13
+
+
+ 596 01c9 01       		.uleb128 0x1
+ 597 01ca 50       		.byte	0x50
+ 598 01cb 03       		.uleb128 0x3
+ 599 01cc 0A       		.byte	0xa
+ 600 01cd 6009     		.2byte	0x960
+ 601 01cf 00       		.byte	0
+ 602 01d0 08       		.uleb128 0x8
+ 603 01d1 22000000 		.4byte	.LVL16
+ 604 01d5 19040000 		.4byte	0x419
+ 605 01d9 E4010000 		.4byte	0x1e4
+ 606 01dd 09       		.uleb128 0x9
+ 607 01de 01       		.uleb128 0x1
+ 608 01df 50       		.byte	0x50
+ 609 01e0 02       		.uleb128 0x2
+ 610 01e1 08       		.byte	0x8
+ 611 01e2 64       		.byte	0x64
+ 612 01e3 00       		.byte	0
+ 613 01e4 07       		.uleb128 0x7
+ 614 01e5 26000000 		.4byte	.LVL17
+ 615 01e9 00010000 		.4byte	0x100
+ 616 01ed 00       		.byte	0
+ 617 01ee 06       		.uleb128 0x6
+ 618 01ef 38010000 		.4byte	.LASF23
+ 619 01f3 01       		.byte	0x1
+ 620 01f4 2F       		.byte	0x2f
+ 621 01f5 00000000 		.4byte	.LFB67
+ 622 01f9 34000000 		.4byte	.LFE67-.LFB67
+ 623 01fd 01       		.uleb128 0x1
+ 624 01fe 9C       		.byte	0x9c
+ 625 01ff 68020000 		.4byte	0x268
+ 626 0203 07       		.uleb128 0x7
+ 627 0204 06000000 		.4byte	.LVL18
+ 628 0208 3A010000 		.4byte	0x13a
+ 629 020c 08       		.uleb128 0x8
+ 630 020d 0E000000 		.4byte	.LVL19
+ 631 0211 24040000 		.4byte	0x424
+ 632 0215 21020000 		.4byte	0x221
+ 633 0219 09       		.uleb128 0x9
+ 634 021a 01       		.uleb128 0x1
+ 635 021b 50       		.byte	0x50
+ 636 021c 03       		.uleb128 0x3
+ 637 021d 0A       		.byte	0xa
+ 638 021e F00A     		.2byte	0xaf0
+ 639 0220 00       		.byte	0
+ 640 0221 08       		.uleb128 0x8
+ 641 0222 14000000 		.4byte	.LVL20
+ 642 0226 19040000 		.4byte	0x419
+ 643 022a 35020000 		.4byte	0x235
+ 644 022e 09       		.uleb128 0x9
+ 645 022f 01       		.uleb128 0x1
+ 646 0230 50       		.byte	0x50
+ 647 0231 02       		.uleb128 0x2
+ 648 0232 08       		.byte	0x8
+ 649 0233 64       		.byte	0x64
+ 650 0234 00       		.byte	0
+ 651 0235 08       		.uleb128 0x8
+ 652 0236 1C000000 		.4byte	.LVL21
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 14
+
+
+ 653 023a 24040000 		.4byte	0x424
+ 654 023e 4A020000 		.4byte	0x24a
+ 655 0242 09       		.uleb128 0x9
+ 656 0243 01       		.uleb128 0x1
+ 657 0244 50       		.byte	0x50
+ 658 0245 03       		.uleb128 0x3
+ 659 0246 0A       		.byte	0xa
+ 660 0247 6009     		.2byte	0x960
+ 661 0249 00       		.byte	0
+ 662 024a 08       		.uleb128 0x8
+ 663 024b 22000000 		.4byte	.LVL22
+ 664 024f 19040000 		.4byte	0x419
+ 665 0253 5E020000 		.4byte	0x25e
+ 666 0257 09       		.uleb128 0x9
+ 667 0258 01       		.uleb128 0x1
+ 668 0259 50       		.byte	0x50
+ 669 025a 02       		.uleb128 0x2
+ 670 025b 08       		.byte	0x8
+ 671 025c 64       		.byte	0x64
+ 672 025d 00       		.byte	0
+ 673 025e 07       		.uleb128 0x7
+ 674 025f 26000000 		.4byte	.LVL23
+ 675 0263 3A010000 		.4byte	0x13a
+ 676 0267 00       		.byte	0
+ 677 0268 0A       		.uleb128 0xa
+ 678 0269 73773100 		.ascii	"sw1\000"
+ 679 026d 01       		.byte	0x1
+ 680 026e 39       		.byte	0x39
+ 681 026f 00000000 		.4byte	.LFB68
+ 682 0273 08000000 		.4byte	.LFE68-.LFB68
+ 683 0277 01       		.uleb128 0x1
+ 684 0278 9C       		.byte	0x9c
+ 685 0279 87020000 		.4byte	0x287
+ 686 027d 07       		.uleb128 0x7
+ 687 027e 06000000 		.4byte	.LVL24
+ 688 0282 74010000 		.4byte	0x174
+ 689 0286 00       		.byte	0
+ 690 0287 0A       		.uleb128 0xa
+ 691 0288 73773200 		.ascii	"sw2\000"
+ 692 028c 01       		.byte	0x1
+ 693 028d 3D       		.byte	0x3d
+ 694 028e 00000000 		.4byte	.LFB69
+ 695 0292 08000000 		.4byte	.LFE69-.LFB69
+ 696 0296 01       		.uleb128 0x1
+ 697 0297 9C       		.byte	0x9c
+ 698 0298 A6020000 		.4byte	0x2a6
+ 699 029c 07       		.uleb128 0x7
+ 700 029d 06000000 		.4byte	.LVL25
+ 701 02a1 EE010000 		.4byte	0x1ee
+ 702 02a5 00       		.byte	0
+ 703 02a6 0B       		.uleb128 0xb
+ 704 02a7 73773300 		.ascii	"sw3\000"
+ 705 02ab 01       		.byte	0x1
+ 706 02ac 41       		.byte	0x41
+ 707 02ad 00000000 		.4byte	.LFB70
+ 708 02b1 0C000000 		.4byte	.LFE70-.LFB70
+ 709 02b5 01       		.uleb128 0x1
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 15
+
+
+ 710 02b6 9C       		.byte	0x9c
+ 711 02b7 0C       		.uleb128 0xc
+ 712 02b8 DA010000 		.4byte	.LASF50
+ 713 02bc 01       		.byte	0x1
+ 714 02bd 45       		.byte	0x45
+ 715 02be 73000000 		.4byte	0x73
+ 716 02c2 00000000 		.4byte	.LFB71
+ 717 02c6 44000000 		.4byte	.LFE71-.LFB71
+ 718 02ca 01       		.uleb128 0x1
+ 719 02cb 9C       		.byte	0x9c
+ 720 02cc 68030000 		.4byte	0x368
+ 721 02d0 0D       		.uleb128 0xd
+ 722 02d1 08000000 		.4byte	.LBB2
+ 723 02d5 3C000000 		.4byte	.LBE2-.LBB2
+ 724 02d9 5E030000 		.4byte	0x35e
+ 725 02dd 0E       		.uleb128 0xe
+ 726 02de 6900     		.ascii	"i\000"
+ 727 02e0 01       		.byte	0x1
+ 728 02e1 53       		.byte	0x53
+ 729 02e2 81000000 		.4byte	0x81
+ 730 02e6 01       		.uleb128 0x1
+ 731 02e7 54       		.byte	0x54
+ 732 02e8 07       		.uleb128 0x7
+ 733 02e9 0C000000 		.4byte	.LVL27
+ 734 02ed 2F040000 		.4byte	0x42f
+ 735 02f1 07       		.uleb128 0x7
+ 736 02f2 12000000 		.4byte	.LVL28
+ 737 02f6 68020000 		.4byte	0x268
+ 738 02fa 07       		.uleb128 0x7
+ 739 02fb 16000000 		.4byte	.LVL29
+ 740 02ff 3A040000 		.4byte	0x43a
+ 741 0303 07       		.uleb128 0x7
+ 742 0304 1C000000 		.4byte	.LVL30
+ 743 0308 87020000 		.4byte	0x287
+ 744 030c 07       		.uleb128 0x7
+ 745 030d 20000000 		.4byte	.LVL31
+ 746 0311 45040000 		.4byte	0x445
+ 747 0315 08       		.uleb128 0x8
+ 748 0316 28000000 		.4byte	.LVL33
+ 749 031a 50040000 		.4byte	0x450
+ 750 031e 28030000 		.4byte	0x328
+ 751 0322 09       		.uleb128 0x9
+ 752 0323 01       		.uleb128 0x1
+ 753 0324 50       		.byte	0x50
+ 754 0325 01       		.uleb128 0x1
+ 755 0326 31       		.byte	0x31
+ 756 0327 00       		.byte	0
+ 757 0328 08       		.uleb128 0x8
+ 758 0329 30000000 		.4byte	.LVL34
+ 759 032d 5B040000 		.4byte	0x45b
+ 760 0331 40030000 		.4byte	0x340
+ 761 0335 09       		.uleb128 0x9
+ 762 0336 01       		.uleb128 0x1
+ 763 0337 50       		.byte	0x50
+ 764 0338 01       		.uleb128 0x1
+ 765 0339 30       		.byte	0x30
+ 766 033a 09       		.uleb128 0x9
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 16
+
+
+ 767 033b 01       		.uleb128 0x1
+ 768 033c 51       		.byte	0x51
+ 769 033d 01       		.uleb128 0x1
+ 770 033e 30       		.byte	0x30
+ 771 033f 00       		.byte	0
+ 772 0340 08       		.uleb128 0x8
+ 773 0341 36000000 		.4byte	.LVL35
+ 774 0345 66040000 		.4byte	0x466
+ 775 0349 54030000 		.4byte	0x354
+ 776 034d 09       		.uleb128 0x9
+ 777 034e 01       		.uleb128 0x1
+ 778 034f 50       		.byte	0x50
+ 779 0350 02       		.uleb128 0x2
+ 780 0351 74       		.byte	0x74
+ 781 0352 00       		.sleb128 0
+ 782 0353 00       		.byte	0
+ 783 0354 07       		.uleb128 0x7
+ 784 0355 42000000 		.4byte	.LVL36
+ 785 0359 74010000 		.4byte	0x174
+ 786 035d 00       		.byte	0
+ 787 035e 07       		.uleb128 0x7
+ 788 035f 08000000 		.4byte	.LVL26
+ 789 0363 C6000000 		.4byte	0xc6
+ 790 0367 00       		.byte	0
+ 791 0368 0F       		.uleb128 0xf
+ 792 0369 93010000 		.4byte	.LASF24
+ 793 036d 05       		.byte	0x5
+ 794 036e 1207     		.2byte	0x712
+ 795 0370 74030000 		.4byte	0x374
+ 796 0374 10       		.uleb128 0x10
+ 797 0375 8C000000 		.4byte	0x8c
+ 798 0379 11       		.uleb128 0x11
+ 799 037a 01020000 		.4byte	.LASF25
+ 800 037e 01       		.byte	0x1
+ 801 037f 11       		.byte	0x11
+ 802 0380 73000000 		.4byte	0x73
+ 803 0384 05       		.uleb128 0x5
+ 804 0385 03       		.byte	0x3
+ 805 0386 00000000 		.4byte	JUMP_COUNTER
+ 806 038a 12       		.uleb128 0x12
+ 807 038b A0010000 		.4byte	.LASF26
+ 808 038f A0010000 		.4byte	.LASF26
+ 809 0393 06       		.byte	0x6
+ 810 0394 92       		.byte	0x92
+ 811 0395 12       		.uleb128 0x12
+ 812 0396 77020000 		.4byte	.LASF27
+ 813 039a 77020000 		.4byte	.LASF27
+ 814 039e 07       		.byte	0x7
+ 815 039f 92       		.byte	0x92
+ 816 03a0 12       		.uleb128 0x12
+ 817 03a1 45020000 		.4byte	.LASF28
+ 818 03a5 45020000 		.4byte	.LASF28
+ 819 03a9 08       		.byte	0x8
+ 820 03aa 3A       		.byte	0x3a
+ 821 03ab 12       		.uleb128 0x12
+ 822 03ac 23010000 		.4byte	.LASF29
+ 823 03b0 23010000 		.4byte	.LASF29
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 17
+
+
+ 824 03b4 09       		.byte	0x9
+ 825 03b5 38       		.byte	0x38
+ 826 03b6 12       		.uleb128 0x12
+ 827 03b7 47010000 		.4byte	.LASF30
+ 828 03bb 47010000 		.4byte	.LASF30
+ 829 03bf 0A       		.byte	0xa
+ 830 03c0 29       		.byte	0x29
+ 831 03c1 12       		.uleb128 0x12
+ 832 03c2 09000000 		.4byte	.LASF31
+ 833 03c6 09000000 		.4byte	.LASF31
+ 834 03ca 0A       		.byte	0xa
+ 835 03cb 26       		.byte	0x26
+ 836 03cc 12       		.uleb128 0x12
+ 837 03cd C4020000 		.4byte	.LASF32
+ 838 03d1 C4020000 		.4byte	.LASF32
+ 839 03d5 0B       		.byte	0xb
+ 840 03d6 29       		.byte	0x29
+ 841 03d7 12       		.uleb128 0x12
+ 842 03d8 C1000000 		.4byte	.LASF33
+ 843 03dc C1000000 		.4byte	.LASF33
+ 844 03e0 0B       		.byte	0xb
+ 845 03e1 26       		.byte	0x26
+ 846 03e2 12       		.uleb128 0x12
+ 847 03e3 A2000000 		.4byte	.LASF34
+ 848 03e7 A2000000 		.4byte	.LASF34
+ 849 03eb 0C       		.byte	0xc
+ 850 03ec 29       		.byte	0x29
+ 851 03ed 12       		.uleb128 0x12
+ 852 03ee FC000000 		.4byte	.LASF35
+ 853 03f2 FC000000 		.4byte	.LASF35
+ 854 03f6 0C       		.byte	0xc
+ 855 03f7 26       		.byte	0x26
+ 856 03f8 12       		.uleb128 0x12
+ 857 03f9 3D010000 		.4byte	.LASF36
+ 858 03fd 3D010000 		.4byte	.LASF36
+ 859 0401 0D       		.byte	0xd
+ 860 0402 29       		.byte	0x29
+ 861 0403 12       		.uleb128 0x12
+ 862 0404 2D010000 		.4byte	.LASF37
+ 863 0408 2D010000 		.4byte	.LASF37
+ 864 040c 0D       		.byte	0xd
+ 865 040d 26       		.byte	0x26
+ 866 040e 12       		.uleb128 0x12
+ 867 040f DF000000 		.4byte	.LASF38
+ 868 0413 DF000000 		.4byte	.LASF38
+ 869 0417 06       		.byte	0x6
+ 870 0418 C3       		.byte	0xc3
+ 871 0419 12       		.uleb128 0x12
+ 872 041a FD020000 		.4byte	.LASF39
+ 873 041e FD020000 		.4byte	.LASF39
+ 874 0422 0E       		.byte	0xe
+ 875 0423 76       		.byte	0x76
+ 876 0424 12       		.uleb128 0x12
+ 877 0425 07010000 		.4byte	.LASF40
+ 878 0429 07010000 		.4byte	.LASF40
+ 879 042d 07       		.byte	0x7
+ 880 042e C3       		.byte	0xc3
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 18
+
+
+ 881 042f 12       		.uleb128 0x12
+ 882 0430 4F020000 		.4byte	.LASF41
+ 883 0434 4F020000 		.4byte	.LASF41
+ 884 0438 0F       		.byte	0xf
+ 885 0439 29       		.byte	0x29
+ 886 043a 12       		.uleb128 0x12
+ 887 043b 00000000 		.4byte	.LASF42
+ 888 043f 00000000 		.4byte	.LASF42
+ 889 0443 10       		.byte	0x10
+ 890 0444 29       		.byte	0x29
+ 891 0445 12       		.uleb128 0x12
+ 892 0446 AC000000 		.4byte	.LASF43
+ 893 044a AC000000 		.4byte	.LASF43
+ 894 044e 08       		.byte	0x8
+ 895 044f 55       		.byte	0x55
+ 896 0450 12       		.uleb128 0x12
+ 897 0451 A0020000 		.4byte	.LASF44
+ 898 0455 A0020000 		.4byte	.LASF44
+ 899 0459 09       		.byte	0x9
+ 900 045a 3A       		.byte	0x3a
+ 901 045b 12       		.uleb128 0x12
+ 902 045c 25020000 		.4byte	.LASF45
+ 903 0460 25020000 		.4byte	.LASF45
+ 904 0464 09       		.byte	0x9
+ 905 0465 3D       		.byte	0x3d
+ 906 0466 12       		.uleb128 0x12
+ 907 0467 32020000 		.4byte	.LASF46
+ 908 046b 32020000 		.4byte	.LASF46
+ 909 046f 09       		.byte	0x9
+ 910 0470 61       		.byte	0x61
+ 911 0471 00       		.byte	0
+ 912              		.section	.debug_abbrev,"",%progbits
+ 913              	.Ldebug_abbrev0:
+ 914 0000 01       		.uleb128 0x1
+ 915 0001 11       		.uleb128 0x11
+ 916 0002 01       		.byte	0x1
+ 917 0003 25       		.uleb128 0x25
+ 918 0004 0E       		.uleb128 0xe
+ 919 0005 13       		.uleb128 0x13
+ 920 0006 0B       		.uleb128 0xb
+ 921 0007 03       		.uleb128 0x3
+ 922 0008 0E       		.uleb128 0xe
+ 923 0009 1B       		.uleb128 0x1b
+ 924 000a 0E       		.uleb128 0xe
+ 925 000b 55       		.uleb128 0x55
+ 926 000c 17       		.uleb128 0x17
+ 927 000d 11       		.uleb128 0x11
+ 928 000e 01       		.uleb128 0x1
+ 929 000f 10       		.uleb128 0x10
+ 930 0010 17       		.uleb128 0x17
+ 931 0011 00       		.byte	0
+ 932 0012 00       		.byte	0
+ 933 0013 02       		.uleb128 0x2
+ 934 0014 24       		.uleb128 0x24
+ 935 0015 00       		.byte	0
+ 936 0016 0B       		.uleb128 0xb
+ 937 0017 0B       		.uleb128 0xb
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 19
+
+
+ 938 0018 3E       		.uleb128 0x3e
+ 939 0019 0B       		.uleb128 0xb
+ 940 001a 03       		.uleb128 0x3
+ 941 001b 0E       		.uleb128 0xe
+ 942 001c 00       		.byte	0
+ 943 001d 00       		.byte	0
+ 944 001e 03       		.uleb128 0x3
+ 945 001f 16       		.uleb128 0x16
+ 946 0020 00       		.byte	0
+ 947 0021 03       		.uleb128 0x3
+ 948 0022 0E       		.uleb128 0xe
+ 949 0023 3A       		.uleb128 0x3a
+ 950 0024 0B       		.uleb128 0xb
+ 951 0025 3B       		.uleb128 0x3b
+ 952 0026 0B       		.uleb128 0xb
+ 953 0027 49       		.uleb128 0x49
+ 954 0028 13       		.uleb128 0x13
+ 955 0029 00       		.byte	0
+ 956 002a 00       		.byte	0
+ 957 002b 04       		.uleb128 0x4
+ 958 002c 24       		.uleb128 0x24
+ 959 002d 00       		.byte	0
+ 960 002e 0B       		.uleb128 0xb
+ 961 002f 0B       		.uleb128 0xb
+ 962 0030 3E       		.uleb128 0x3e
+ 963 0031 0B       		.uleb128 0xb
+ 964 0032 03       		.uleb128 0x3
+ 965 0033 08       		.uleb128 0x8
+ 966 0034 00       		.byte	0
+ 967 0035 00       		.byte	0
+ 968 0036 05       		.uleb128 0x5
+ 969 0037 16       		.uleb128 0x16
+ 970 0038 00       		.byte	0
+ 971 0039 03       		.uleb128 0x3
+ 972 003a 0E       		.uleb128 0xe
+ 973 003b 3A       		.uleb128 0x3a
+ 974 003c 0B       		.uleb128 0xb
+ 975 003d 3B       		.uleb128 0x3b
+ 976 003e 05       		.uleb128 0x5
+ 977 003f 49       		.uleb128 0x49
+ 978 0040 13       		.uleb128 0x13
+ 979 0041 00       		.byte	0
+ 980 0042 00       		.byte	0
+ 981 0043 06       		.uleb128 0x6
+ 982 0044 2E       		.uleb128 0x2e
+ 983 0045 01       		.byte	0x1
+ 984 0046 3F       		.uleb128 0x3f
+ 985 0047 19       		.uleb128 0x19
+ 986 0048 03       		.uleb128 0x3
+ 987 0049 0E       		.uleb128 0xe
+ 988 004a 3A       		.uleb128 0x3a
+ 989 004b 0B       		.uleb128 0xb
+ 990 004c 3B       		.uleb128 0x3b
+ 991 004d 0B       		.uleb128 0xb
+ 992 004e 11       		.uleb128 0x11
+ 993 004f 01       		.uleb128 0x1
+ 994 0050 12       		.uleb128 0x12
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 20
+
+
+ 995 0051 06       		.uleb128 0x6
+ 996 0052 40       		.uleb128 0x40
+ 997 0053 18       		.uleb128 0x18
+ 998 0054 9742     		.uleb128 0x2117
+ 999 0056 19       		.uleb128 0x19
+ 1000 0057 01       		.uleb128 0x1
+ 1001 0058 13       		.uleb128 0x13
+ 1002 0059 00       		.byte	0
+ 1003 005a 00       		.byte	0
+ 1004 005b 07       		.uleb128 0x7
+ 1005 005c 898201   		.uleb128 0x4109
+ 1006 005f 00       		.byte	0
+ 1007 0060 11       		.uleb128 0x11
+ 1008 0061 01       		.uleb128 0x1
+ 1009 0062 31       		.uleb128 0x31
+ 1010 0063 13       		.uleb128 0x13
+ 1011 0064 00       		.byte	0
+ 1012 0065 00       		.byte	0
+ 1013 0066 08       		.uleb128 0x8
+ 1014 0067 898201   		.uleb128 0x4109
+ 1015 006a 01       		.byte	0x1
+ 1016 006b 11       		.uleb128 0x11
+ 1017 006c 01       		.uleb128 0x1
+ 1018 006d 31       		.uleb128 0x31
+ 1019 006e 13       		.uleb128 0x13
+ 1020 006f 01       		.uleb128 0x1
+ 1021 0070 13       		.uleb128 0x13
+ 1022 0071 00       		.byte	0
+ 1023 0072 00       		.byte	0
+ 1024 0073 09       		.uleb128 0x9
+ 1025 0074 8A8201   		.uleb128 0x410a
+ 1026 0077 00       		.byte	0
+ 1027 0078 02       		.uleb128 0x2
+ 1028 0079 18       		.uleb128 0x18
+ 1029 007a 9142     		.uleb128 0x2111
+ 1030 007c 18       		.uleb128 0x18
+ 1031 007d 00       		.byte	0
+ 1032 007e 00       		.byte	0
+ 1033 007f 0A       		.uleb128 0xa
+ 1034 0080 2E       		.uleb128 0x2e
+ 1035 0081 01       		.byte	0x1
+ 1036 0082 3F       		.uleb128 0x3f
+ 1037 0083 19       		.uleb128 0x19
+ 1038 0084 03       		.uleb128 0x3
+ 1039 0085 08       		.uleb128 0x8
+ 1040 0086 3A       		.uleb128 0x3a
+ 1041 0087 0B       		.uleb128 0xb
+ 1042 0088 3B       		.uleb128 0x3b
+ 1043 0089 0B       		.uleb128 0xb
+ 1044 008a 11       		.uleb128 0x11
+ 1045 008b 01       		.uleb128 0x1
+ 1046 008c 12       		.uleb128 0x12
+ 1047 008d 06       		.uleb128 0x6
+ 1048 008e 40       		.uleb128 0x40
+ 1049 008f 18       		.uleb128 0x18
+ 1050 0090 9742     		.uleb128 0x2117
+ 1051 0092 19       		.uleb128 0x19
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 21
+
+
+ 1052 0093 01       		.uleb128 0x1
+ 1053 0094 13       		.uleb128 0x13
+ 1054 0095 00       		.byte	0
+ 1055 0096 00       		.byte	0
+ 1056 0097 0B       		.uleb128 0xb
+ 1057 0098 2E       		.uleb128 0x2e
+ 1058 0099 00       		.byte	0
+ 1059 009a 3F       		.uleb128 0x3f
+ 1060 009b 19       		.uleb128 0x19
+ 1061 009c 03       		.uleb128 0x3
+ 1062 009d 08       		.uleb128 0x8
+ 1063 009e 3A       		.uleb128 0x3a
+ 1064 009f 0B       		.uleb128 0xb
+ 1065 00a0 3B       		.uleb128 0x3b
+ 1066 00a1 0B       		.uleb128 0xb
+ 1067 00a2 11       		.uleb128 0x11
+ 1068 00a3 01       		.uleb128 0x1
+ 1069 00a4 12       		.uleb128 0x12
+ 1070 00a5 06       		.uleb128 0x6
+ 1071 00a6 40       		.uleb128 0x40
+ 1072 00a7 18       		.uleb128 0x18
+ 1073 00a8 9742     		.uleb128 0x2117
+ 1074 00aa 19       		.uleb128 0x19
+ 1075 00ab 00       		.byte	0
+ 1076 00ac 00       		.byte	0
+ 1077 00ad 0C       		.uleb128 0xc
+ 1078 00ae 2E       		.uleb128 0x2e
+ 1079 00af 01       		.byte	0x1
+ 1080 00b0 3F       		.uleb128 0x3f
+ 1081 00b1 19       		.uleb128 0x19
+ 1082 00b2 03       		.uleb128 0x3
+ 1083 00b3 0E       		.uleb128 0xe
+ 1084 00b4 3A       		.uleb128 0x3a
+ 1085 00b5 0B       		.uleb128 0xb
+ 1086 00b6 3B       		.uleb128 0x3b
+ 1087 00b7 0B       		.uleb128 0xb
+ 1088 00b8 27       		.uleb128 0x27
+ 1089 00b9 19       		.uleb128 0x19
+ 1090 00ba 49       		.uleb128 0x49
+ 1091 00bb 13       		.uleb128 0x13
+ 1092 00bc 8701     		.uleb128 0x87
+ 1093 00be 19       		.uleb128 0x19
+ 1094 00bf 11       		.uleb128 0x11
+ 1095 00c0 01       		.uleb128 0x1
+ 1096 00c1 12       		.uleb128 0x12
+ 1097 00c2 06       		.uleb128 0x6
+ 1098 00c3 40       		.uleb128 0x40
+ 1099 00c4 18       		.uleb128 0x18
+ 1100 00c5 9742     		.uleb128 0x2117
+ 1101 00c7 19       		.uleb128 0x19
+ 1102 00c8 01       		.uleb128 0x1
+ 1103 00c9 13       		.uleb128 0x13
+ 1104 00ca 00       		.byte	0
+ 1105 00cb 00       		.byte	0
+ 1106 00cc 0D       		.uleb128 0xd
+ 1107 00cd 0B       		.uleb128 0xb
+ 1108 00ce 01       		.byte	0x1
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 22
+
+
+ 1109 00cf 11       		.uleb128 0x11
+ 1110 00d0 01       		.uleb128 0x1
+ 1111 00d1 12       		.uleb128 0x12
+ 1112 00d2 06       		.uleb128 0x6
+ 1113 00d3 01       		.uleb128 0x1
+ 1114 00d4 13       		.uleb128 0x13
+ 1115 00d5 00       		.byte	0
+ 1116 00d6 00       		.byte	0
+ 1117 00d7 0E       		.uleb128 0xe
+ 1118 00d8 34       		.uleb128 0x34
+ 1119 00d9 00       		.byte	0
+ 1120 00da 03       		.uleb128 0x3
+ 1121 00db 08       		.uleb128 0x8
+ 1122 00dc 3A       		.uleb128 0x3a
+ 1123 00dd 0B       		.uleb128 0xb
+ 1124 00de 3B       		.uleb128 0x3b
+ 1125 00df 0B       		.uleb128 0xb
+ 1126 00e0 49       		.uleb128 0x49
+ 1127 00e1 13       		.uleb128 0x13
+ 1128 00e2 02       		.uleb128 0x2
+ 1129 00e3 18       		.uleb128 0x18
+ 1130 00e4 00       		.byte	0
+ 1131 00e5 00       		.byte	0
+ 1132 00e6 0F       		.uleb128 0xf
+ 1133 00e7 34       		.uleb128 0x34
+ 1134 00e8 00       		.byte	0
+ 1135 00e9 03       		.uleb128 0x3
+ 1136 00ea 0E       		.uleb128 0xe
+ 1137 00eb 3A       		.uleb128 0x3a
+ 1138 00ec 0B       		.uleb128 0xb
+ 1139 00ed 3B       		.uleb128 0x3b
+ 1140 00ee 05       		.uleb128 0x5
+ 1141 00ef 49       		.uleb128 0x49
+ 1142 00f0 13       		.uleb128 0x13
+ 1143 00f1 3F       		.uleb128 0x3f
+ 1144 00f2 19       		.uleb128 0x19
+ 1145 00f3 3C       		.uleb128 0x3c
+ 1146 00f4 19       		.uleb128 0x19
+ 1147 00f5 00       		.byte	0
+ 1148 00f6 00       		.byte	0
+ 1149 00f7 10       		.uleb128 0x10
+ 1150 00f8 35       		.uleb128 0x35
+ 1151 00f9 00       		.byte	0
+ 1152 00fa 49       		.uleb128 0x49
+ 1153 00fb 13       		.uleb128 0x13
+ 1154 00fc 00       		.byte	0
+ 1155 00fd 00       		.byte	0
+ 1156 00fe 11       		.uleb128 0x11
+ 1157 00ff 34       		.uleb128 0x34
+ 1158 0100 00       		.byte	0
+ 1159 0101 03       		.uleb128 0x3
+ 1160 0102 0E       		.uleb128 0xe
+ 1161 0103 3A       		.uleb128 0x3a
+ 1162 0104 0B       		.uleb128 0xb
+ 1163 0105 3B       		.uleb128 0x3b
+ 1164 0106 0B       		.uleb128 0xb
+ 1165 0107 49       		.uleb128 0x49
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 23
+
+
+ 1166 0108 13       		.uleb128 0x13
+ 1167 0109 3F       		.uleb128 0x3f
+ 1168 010a 19       		.uleb128 0x19
+ 1169 010b 02       		.uleb128 0x2
+ 1170 010c 18       		.uleb128 0x18
+ 1171 010d 00       		.byte	0
+ 1172 010e 00       		.byte	0
+ 1173 010f 12       		.uleb128 0x12
+ 1174 0110 2E       		.uleb128 0x2e
+ 1175 0111 00       		.byte	0
+ 1176 0112 3F       		.uleb128 0x3f
+ 1177 0113 19       		.uleb128 0x19
+ 1178 0114 3C       		.uleb128 0x3c
+ 1179 0115 19       		.uleb128 0x19
+ 1180 0116 6E       		.uleb128 0x6e
+ 1181 0117 0E       		.uleb128 0xe
+ 1182 0118 03       		.uleb128 0x3
+ 1183 0119 0E       		.uleb128 0xe
+ 1184 011a 3A       		.uleb128 0x3a
+ 1185 011b 0B       		.uleb128 0xb
+ 1186 011c 3B       		.uleb128 0x3b
+ 1187 011d 0B       		.uleb128 0xb
+ 1188 011e 00       		.byte	0
+ 1189 011f 00       		.byte	0
+ 1190 0120 00       		.byte	0
+ 1191              		.section	.debug_aranges,"",%progbits
+ 1192 0000 5C000000 		.4byte	0x5c
+ 1193 0004 0200     		.2byte	0x2
+ 1194 0006 00000000 		.4byte	.Ldebug_info0
+ 1195 000a 04       		.byte	0x4
+ 1196 000b 00       		.byte	0
+ 1197 000c 0000     		.2byte	0
+ 1198 000e 0000     		.2byte	0
+ 1199 0010 00000000 		.4byte	.LFB63
+ 1200 0014 14000000 		.4byte	.LFE63-.LFB63
+ 1201 0018 00000000 		.4byte	.LFB64
+ 1202 001c 1C000000 		.4byte	.LFE64-.LFB64
+ 1203 0020 00000000 		.4byte	.LFB65
+ 1204 0024 1C000000 		.4byte	.LFE65-.LFB65
+ 1205 0028 00000000 		.4byte	.LFB66
+ 1206 002c 34000000 		.4byte	.LFE66-.LFB66
+ 1207 0030 00000000 		.4byte	.LFB67
+ 1208 0034 34000000 		.4byte	.LFE67-.LFB67
+ 1209 0038 00000000 		.4byte	.LFB68
+ 1210 003c 08000000 		.4byte	.LFE68-.LFB68
+ 1211 0040 00000000 		.4byte	.LFB69
+ 1212 0044 08000000 		.4byte	.LFE69-.LFB69
+ 1213 0048 00000000 		.4byte	.LFB70
+ 1214 004c 0C000000 		.4byte	.LFE70-.LFB70
+ 1215 0050 00000000 		.4byte	.LFB71
+ 1216 0054 44000000 		.4byte	.LFE71-.LFB71
+ 1217 0058 00000000 		.4byte	0
+ 1218 005c 00000000 		.4byte	0
+ 1219              		.section	.debug_ranges,"",%progbits
+ 1220              	.Ldebug_ranges0:
+ 1221 0000 00000000 		.4byte	.LFB63
+ 1222 0004 14000000 		.4byte	.LFE63
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 24
+
+
+ 1223 0008 00000000 		.4byte	.LFB64
+ 1224 000c 1C000000 		.4byte	.LFE64
+ 1225 0010 00000000 		.4byte	.LFB65
+ 1226 0014 1C000000 		.4byte	.LFE65
+ 1227 0018 00000000 		.4byte	.LFB66
+ 1228 001c 34000000 		.4byte	.LFE66
+ 1229 0020 00000000 		.4byte	.LFB67
+ 1230 0024 34000000 		.4byte	.LFE67
+ 1231 0028 00000000 		.4byte	.LFB68
+ 1232 002c 08000000 		.4byte	.LFE68
+ 1233 0030 00000000 		.4byte	.LFB69
+ 1234 0034 08000000 		.4byte	.LFE69
+ 1235 0038 00000000 		.4byte	.LFB70
+ 1236 003c 0C000000 		.4byte	.LFE70
+ 1237 0040 00000000 		.4byte	.LFB71
+ 1238 0044 44000000 		.4byte	.LFE71
+ 1239 0048 00000000 		.4byte	0
+ 1240 004c 00000000 		.4byte	0
+ 1241              		.section	.debug_line,"",%progbits
+ 1242              	.Ldebug_line0:
+ 1243 0000 73020000 		.section	.debug_str,"MS",%progbits,1
+ 1243      0200BF01 
+ 1243      00000201 
+ 1243      FB0E0D00 
+ 1243      01010101 
+ 1244              	.LASF42:
+ 1245 0000 5357325F 		.ascii	"SW2_Read\000"
+ 1245      52656164 
+ 1245      00
+ 1246              	.LASF31:
+ 1247 0009 4C454431 		.ascii	"LED1_Write\000"
+ 1247      5F577269 
+ 1247      746500
+ 1248              	.LASF47:
+ 1249 0014 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1249      43313120 
+ 1249      352E342E 
+ 1249      31203230 
+ 1249      31363036 
+ 1250 0047 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1250      20726576 
+ 1250      6973696F 
+ 1250      6E203233 
+ 1250      37373135 
+ 1251 007a 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1251      66756E63 
+ 1251      74696F6E 
+ 1251      2D736563 
+ 1251      74696F6E 
+ 1252              	.LASF34:
+ 1253 00a2 4C454433 		.ascii	"LED3_Read\000"
+ 1253      5F526561 
+ 1253      6400
+ 1254              	.LASF43:
+ 1255 00ac 4144435F 		.ascii	"ADC_Read16\000"
+ 1255      52656164 
+ 1255      313600
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 25
+
+
+ 1256              	.LASF5:
+ 1257 00b7 5F5F696E 		.ascii	"__int32_t\000"
+ 1257      7433325F 
+ 1257      7400
+ 1258              	.LASF33:
+ 1259 00c1 4C454432 		.ascii	"LED2_Write\000"
+ 1259      5F577269 
+ 1259      746500
+ 1260              	.LASF3:
+ 1261 00cc 73686F72 		.ascii	"short unsigned int\000"
+ 1261      7420756E 
+ 1261      7369676E 
+ 1261      65642069 
+ 1261      6E7400
+ 1262              	.LASF38:
+ 1263 00df 50574D5F 		.ascii	"PWM_JUMP_WriteCompare\000"
+ 1263      4A554D50 
+ 1263      5F577269 
+ 1263      7465436F 
+ 1263      6D706172 
+ 1264              	.LASF15:
+ 1265 00f5 646F7562 		.ascii	"double\000"
+ 1265      6C6500
+ 1266              	.LASF35:
+ 1267 00fc 4C454433 		.ascii	"LED3_Write\000"
+ 1267      5F577269 
+ 1267      746500
+ 1268              	.LASF40:
+ 1269 0107 50574D5F 		.ascii	"PWM_DUCK_WriteCompare\000"
+ 1269      4455434B 
+ 1269      5F577269 
+ 1269      7465436F 
+ 1269      6D706172 
+ 1270              	.LASF14:
+ 1271 011d 666C6F61 		.ascii	"float\000"
+ 1271      7400
+ 1272              	.LASF29:
+ 1273 0123 4C43445F 		.ascii	"LCD_Start\000"
+ 1273      53746172 
+ 1273      7400
+ 1274              	.LASF37:
+ 1275 012d 4C454434 		.ascii	"LED4_Write\000"
+ 1275      5F577269 
+ 1275      746500
+ 1276              	.LASF23:
+ 1277 0138 6475636B 		.ascii	"duck\000"
+ 1277      00
+ 1278              	.LASF36:
+ 1279 013d 4C454434 		.ascii	"LED4_Read\000"
+ 1279      5F526561 
+ 1279      6400
+ 1280              	.LASF30:
+ 1281 0147 4C454431 		.ascii	"LED1_Read\000"
+ 1281      5F526561 
+ 1281      6400
+ 1282              	.LASF49:
+ 1283 0151 433A5C55 		.ascii	"C:\\Users\\antoi\\Documents\\PSoC Creator\\ProjetDi"
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 26
+
+
+ 1283      73657273 
+ 1283      5C616E74 
+ 1283      6F695C44 
+ 1283      6F63756D 
+ 1284 017f 6E6F5C50 		.ascii	"no\\ProjetDino.cydsn\000"
+ 1284      726F6A65 
+ 1284      7444696E 
+ 1284      6F2E6379 
+ 1284      64736E00 
+ 1285              	.LASF24:
+ 1286 0193 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1286      52784275 
+ 1286      66666572 
+ 1286      00
+ 1287              	.LASF26:
+ 1288 01a0 50574D5F 		.ascii	"PWM_JUMP_Start\000"
+ 1288      4A554D50 
+ 1288      5F537461 
+ 1288      727400
+ 1289              	.LASF1:
+ 1290 01af 756E7369 		.ascii	"unsigned char\000"
+ 1290      676E6564 
+ 1290      20636861 
+ 1290      7200
+ 1291              	.LASF4:
+ 1292 01bd 5F5F7569 		.ascii	"__uint16_t\000"
+ 1292      6E743136 
+ 1292      5F7400
+ 1293              	.LASF7:
+ 1294 01c8 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1294      20756E73 
+ 1294      69676E65 
+ 1294      6420696E 
+ 1294      7400
+ 1295              	.LASF50:
+ 1296 01da 6D61696E 		.ascii	"main\000"
+ 1296      00
+ 1297              	.LASF13:
+ 1298 01df 75696E74 		.ascii	"uint16\000"
+ 1298      313600
+ 1299              	.LASF10:
+ 1300 01e6 756E7369 		.ascii	"unsigned int\000"
+ 1300      676E6564 
+ 1300      20696E74 
+ 1300      00
+ 1301              	.LASF21:
+ 1302 01f3 6475636B 		.ascii	"duckLEDtoggle\000"
+ 1302      4C454474 
+ 1302      6F67676C 
+ 1302      6500
+ 1303              	.LASF25:
+ 1304 0201 4A554D50 		.ascii	"JUMP_COUNTER\000"
+ 1304      5F434F55 
+ 1304      4E544552 
+ 1304      00
+ 1305              	.LASF9:
+ 1306 020e 6C6F6E67 		.ascii	"long long unsigned int\000"
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 27
+
+
+ 1306      206C6F6E 
+ 1306      6720756E 
+ 1306      7369676E 
+ 1306      65642069 
+ 1307              	.LASF45:
+ 1308 0225 4C43445F 		.ascii	"LCD_Position\000"
+ 1308      506F7369 
+ 1308      74696F6E 
+ 1308      00
+ 1309              	.LASF46:
+ 1310 0232 4C43445F 		.ascii	"LCD_PrintU32Number\000"
+ 1310      5072696E 
+ 1310      74553332 
+ 1310      4E756D62 
+ 1310      657200
+ 1311              	.LASF28:
+ 1312 0245 4144435F 		.ascii	"ADC_Start\000"
+ 1312      53746172 
+ 1312      7400
+ 1313              	.LASF41:
+ 1314 024f 5357315F 		.ascii	"SW1_Read\000"
+ 1314      52656164 
+ 1314      00
+ 1315              	.LASF20:
+ 1316 0258 6A756D70 		.ascii	"jumpLEDtoggle\000"
+ 1316      4C454474 
+ 1316      6F67676C 
+ 1316      6500
+ 1317              	.LASF12:
+ 1318 0266 696E7433 		.ascii	"int32_t\000"
+ 1318      325F7400 
+ 1319              	.LASF18:
+ 1320 026e 73697A65 		.ascii	"sizetype\000"
+ 1320      74797065 
+ 1320      00
+ 1321              	.LASF27:
+ 1322 0277 50574D5F 		.ascii	"PWM_DUCK_Start\000"
+ 1322      4455434B 
+ 1322      5F537461 
+ 1322      727400
+ 1323              	.LASF8:
+ 1324 0286 6C6F6E67 		.ascii	"long long int\000"
+ 1324      206C6F6E 
+ 1324      6720696E 
+ 1324      7400
+ 1325              	.LASF48:
+ 1326 0294 6D61696E 		.ascii	"main.c\000"
+ 1326      2E6300
+ 1327              	.LASF16:
+ 1328 029b 63686172 		.ascii	"char\000"
+ 1328      00
+ 1329              	.LASF44:
+ 1330 02a0 4C43445F 		.ascii	"LCD_WriteControl\000"
+ 1330      57726974 
+ 1330      65436F6E 
+ 1330      74726F6C 
+ 1330      00
+ARM GAS  C:\Users\antoi\AppData\Local\Temp\ccndUqsR.s 			page 28
+
+
+ 1331              	.LASF2:
+ 1332 02b1 73686F72 		.ascii	"short int\000"
+ 1332      7420696E 
+ 1332      7400
+ 1333              	.LASF11:
+ 1334 02bb 75696E74 		.ascii	"uint16_t\000"
+ 1334      31365F74 
+ 1334      00
+ 1335              	.LASF32:
+ 1336 02c4 4C454432 		.ascii	"LED2_Read\000"
+ 1336      5F526561 
+ 1336      6400
+ 1337              	.LASF6:
+ 1338 02ce 6C6F6E67 		.ascii	"long int\000"
+ 1338      20696E74 
+ 1338      00
+ 1339              	.LASF17:
+ 1340 02d7 6C6F6E67 		.ascii	"long double\000"
+ 1340      20646F75 
+ 1340      626C6500 
+ 1341              	.LASF22:
+ 1342 02e3 6A756D70 		.ascii	"jump\000"
+ 1342      00
+ 1343              	.LASF0:
+ 1344 02e8 7369676E 		.ascii	"signed char\000"
+ 1344      65642063 
+ 1344      68617200 
+ 1345              	.LASF19:
+ 1346 02f4 696E6974 		.ascii	"initDino\000"
+ 1346      44696E6F 
+ 1346      00
+ 1347              	.LASF39:
+ 1348 02fd 43794465 		.ascii	"CyDelay\000"
+ 1348      6C617900 
+ 1349              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
